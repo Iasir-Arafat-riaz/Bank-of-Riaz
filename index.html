@@ -28,19 +28,19 @@
             <div class="col-md-4">
                 <div class="deposit status">
                     <h5>Deposit</h5>
-                    <h2>$00</h2>
+                    <h2>$ <span id="diposit-dollar">00</span> </h2>
                 </div>
             </div>
             <div class="col-md-4 ">
                 <div class="withdraw status">
                     <h5>Withdraw</h5>
-                    <h2>$00</h2>
+                    <h2>$ <span id="balWithdraw">00</span> </h2>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="balance status">
                     <h5>Balance</h5>
-                    <h2>$1240</h2>
+                    <h2>$<span id="current-balance">1240</span></h2>
                 </div>
             </div>
         </div>
@@ -48,17 +48,18 @@
             <div class="col-md-6">
                 <div class="submit-area">
                     <h4>Deposit</h4>
-                <input type="text" class="form-control" placeholder="$amount you wat to deposite">
-                <br>
-                <button class="btn btn-success">Deposit</button>
+                    <input id="deposite-add" type="text" class="form-control"
+                        placeholder="$amount you want to deposite">
+                    <br>
+                    <button id="deposite-amount" class="btn btn-success">Deposit</button>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="submit-area">
                     <h4>Withdraw</h4>
-                <input type="text" class="form-control" placeholder="$amount you wat to withdraw">
-                <br>
-                <button class="btn btn-success">Withdraw</button>
+                    <input id="withdraw" type="text" class="form-control" placeholder="$amount you wat to withdraw">
+                    <br>
+                    <button id="withdraw-amount" class="btn btn-success">Withdraw</button>
                 </div>
             </div>
         </div>
@@ -71,6 +72,64 @@
 
             document.getElementById("transaction-area").style.display = "block";
         })
+        var depositButton = document.getElementById("deposite-amount");
+        depositButton.addEventListener("click", function () {
+            var inputMoney = document.getElementById("deposite-add").value;
+            var totalMoney = parseFloat(inputMoney);
+
+            //code repeat off korar jonno function e kaj kora hoyeche
+            // var cardMoney = document.getElementById("diposit-dollar").innerText;
+            // var Digit = parseFloat(cardMoney);
+            // var total = totalMoney + Digit;
+            // document.getElementById("diposit-dollar").innerText = total;
+
+            // var currentBalance = document.getElementById("current-balance").innerText;
+            // var currentBalFloat = parseFloat(currentBalance);
+            // var totalBal = totalMoney + currentBalFloat;
+            // document.getElementById("current-balance").innerText = totalBal;
+
+
+
+            // when we do same type of sum then we will make a function
+            function updateSpanText(id, totalMoney) {
+                var currentMoney = document.getElementById(id).innerText;
+                var Digit = parseFloat(currentMoney);
+                var total = totalMoney + Digit;
+                document.getElementById(id).innerText = total;
+
+            }
+
+            updateSpanText("diposit-dollar", totalMoney);
+            updateSpanText("current-balance", totalMoney);
+
+            document.getElementById("deposite-add").value = "";
+        
+            
+        })
+       
+        document.getElementById("withdraw-amount").addEventListener("click", function () {
+            var withdrawMoney = document.getElementById("withdraw").value;
+            var withdrawCurancy = parseFloat(withdrawMoney);
+
+            var withdrawCard = document.getElementById("balWithdraw").innerText;
+            var withdrawRound = parseFloat(withdrawCard);
+            var withdrawToatl = withdrawCurancy + withdrawRound;
+            document.getElementById("balWithdraw").innerText = withdrawToatl;
+
+           
+
+
+            var withdBal = document.getElementById("current-balance").innerText;
+            var roundWithdBal =parseFloat(withdBal);
+            var sumBalance = roundWithdBal-withdrawCurancy;
+            document.getElementById("current-balance").innerText=sumBalance;
+
+
+            document.getElementById("withdraw").value ="";
+         })
+
+
+
 
 
 
